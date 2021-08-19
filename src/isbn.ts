@@ -1,5 +1,6 @@
 import got from 'got';
 
+import {proxy} from './imgproxy';
 import {BookcoverServer} from './protogen/bookcover';
 
 export const openbd = (isbn: string) =>
@@ -13,5 +14,5 @@ export const handler: BookcoverServer['findFromISBN'] = async (
   callback,
 ) => {
   const url = await Promise.any([openbd(isbn)]);
-  return callback(null, url ? {url} : {});
+  return callback(null, url ? {url: proxy(url)} : {});
 };
