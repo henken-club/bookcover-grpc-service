@@ -16,10 +16,12 @@ FROM deps AS builder
 WORKDIR /app
 
 COPY scripts/protogen ./scripts/protogen
+COPY proto ./proto
+RUN npm run protogen
+
 COPY tsconfig.json ./
 COPY src ./src
-RUN npm run protogen && \
-    npm run build
+RUN npm run build
 
 # runner
 FROM node:16.4.2-alpine AS runner

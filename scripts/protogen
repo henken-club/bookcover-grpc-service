@@ -1,5 +1,7 @@
 #!/bin/sh
 
+mkdir -p src/protogen
+
 $(npm bin)/grpc_tools_node_protoc \
     --proto_path=proto \
     --plugin=$(npm bin)/protoc-gen-ts_proto \

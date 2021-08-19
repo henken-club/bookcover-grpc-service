@@ -1,12 +1,12 @@
 import {Server, ServerCredentials} from '@grpc/grpc-js';
 
-import {BookcoverService} from './protogen/bookcover';
-import {handler as findFromISBN} from './isbn';
+import {FetcherService} from './protogen/bookcover';
+import {impl as fetcherServer} from './fetcher';
 
 function main() {
   const server = new Server();
 
-  server.addService(BookcoverService, {findFromISBN});
+  server.addService(FetcherService, fetcherServer);
   server.bindAsync(
     // eslint-disable-next-line no-process-env
     `0.0.0.0:${process.env.PORT || 5000}`,
